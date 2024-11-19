@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: CITRONIX
+  datasource:
+    driver-class-name: com.ibm.db2.jcc.DB2Driver
+    username: db2inst1
+    password : Fasha321@
+    url: jdbc:db2://localhost:50000/CTRX_DB
+  jpa:
+    hibernate:
+      ddl-auto: update
