@@ -67,5 +67,4 @@ public class GlobalExceptionHandler {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), "Validations Error", validationErrors, LocalDateTime.now());
     }
 
-
 }
