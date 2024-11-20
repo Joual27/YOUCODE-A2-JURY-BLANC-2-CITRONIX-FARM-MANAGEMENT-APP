@@ -1,4 +1,4 @@
-package org.youcode.CITRONIX.shared.DTOs;
+package org.youcode.CITRONIX.shared.utils.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

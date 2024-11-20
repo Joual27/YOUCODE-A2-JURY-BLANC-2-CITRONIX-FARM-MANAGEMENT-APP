@@ -1,4 +1,4 @@
-package org.youcode.CITRONIX.shared;
+package org.youcode.CITRONIX.shared.utils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.youcode.CITRONIX.app.exceptions.EntityNotFoundException;
-import org.youcode.CITRONIX.shared.DTOs.ErrorDTO;
+import org.youcode.CITRONIX.app.exceptions.UniqueFieldException;
+import org.youcode.CITRONIX.shared.utils.DTOs.ErrorDTO;
 
 
 import java.time.LocalDateTime;
@@ -65,6 +66,12 @@ public class GlobalExceptionHandler {
         }
 
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), "Validations Error", validationErrors, LocalDateTime.now());
+    }
+
+    @ExceptionHandler(UniqueFieldException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleUniqueFieldException(UniqueFieldException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
     }
 
 }
