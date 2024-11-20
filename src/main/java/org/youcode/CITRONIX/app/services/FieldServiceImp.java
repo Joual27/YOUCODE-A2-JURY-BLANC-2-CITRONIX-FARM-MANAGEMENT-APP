@@ -1,6 +1,8 @@
 package org.youcode.CITRONIX.app.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.youcode.CITRONIX.app.DTOs.field.CreateFieldDTO;
 import org.youcode.CITRONIX.app.DTOs.field.FieldResponseDTO;
@@ -69,6 +71,26 @@ public class FieldServiceImp implements FieldService {
         fieldToUpdate.setId(id);
         Field updateField = fieldPersistenceAdapter.save(fieldToUpdate);
         return fieldEntityToFieldResponseDTOMapper.entityToDto(updateField);
+    }
+
+    @Override
+    public Page<FieldResponseDTO> getAllFields(Pageable pageable){
+        Page<Field> fields = fieldPersistenceAdapter.findAll(pageable);
+        return fields.map(fieldEntityToFieldResponseDTOMapper::entityToDto);
+    }
+
+    @Override
+    public FieldResponseDTO getById(Long id){
+        Field f = fieldPersistenceAdapter.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No Field found with given ID !"));
+        return fieldEntityToFieldResponseDTOMapper.entityToDto(f);
+    }
+    @Override
+    public FieldResponseDTO delete(Long id){
+        Field f = fieldPersistenceAdapter.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No Field found with given ID !"));
+        fieldPersistenceAdapter.deleteById(id);
+        return fieldEntityToFieldResponseDTOMapper.entityToDto(f);
     }
 
 
