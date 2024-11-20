@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.youcode.CITRONIX.app.DTOs.field.CreateFieldDTO;
 import org.youcode.CITRONIX.app.DTOs.field.FieldResponseDTO;
+import org.youcode.CITRONIX.app.DTOs.field.UpdateFieldDTO;
 import org.youcode.CITRONIX.app.Mappers.field.CreateFieldDTOToFieldEntityMapper;
 import org.youcode.CITRONIX.app.Mappers.field.FieldEntityToFieldResponseDTOMapper;
+import org.youcode.CITRONIX.app.Mappers.field.UpdateFieldDTOToFieldEntityMapper;
 import org.youcode.CITRONIX.app.exceptions.EntityNotFoundException;
 import org.youcode.CITRONIX.app.exceptions.FarmFieldsLimitReached;
 import org.youcode.CITRONIX.app.exceptions.FarmSurfaceExceeded;
@@ -23,6 +25,7 @@ public class FieldServiceImp implements FieldService {
     private final FarmService farmService;
     private final CreateFieldDTOToFieldEntityMapper createFieldDTOToFieldEntityMapper;
     private final FieldEntityToFieldResponseDTOMapper fieldEntityToFieldResponseDTOMapper;
+    private final UpdateFieldDTOToFieldEntityMapper updateFieldDTOToFieldEntityMapper;
 
     @Override
     public FieldResponseDTO save(CreateFieldDTO data){
@@ -49,6 +52,23 @@ public class FieldServiceImp implements FieldService {
     private Double getOverallAvailableSpaceInFarm(Farm f){
         Double takenArea = fieldPersistenceAdapter.getOverallFieldsSurfacePerFarm(f) == null ? 0 : fieldPersistenceAdapter.getOverallFieldsSurfacePerFarm(f);
         return f.getSurface() - takenArea;
+    }
+
+    @Override
+    public FieldResponseDTO update(UpdateFieldDTO data , Long id){
+        Field f = fieldPersistenceAdapter.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No Field found with given ID !"));
+        if (data.surface() > f.getFarm().getSurface() / 2){
+            throw new FieldMaxSurfaceExceeded("The field surface cant be more than half of the farm's surface which is :" + f.getSurface() + "Max value accepted is " +  f.getSurface()/2);
+        }
+        if (data.surface() > getOverallAvailableSpaceInFarm(f.getFarm())){
+            throw new FarmSurfaceExceeded("U have exceeded the overall surface of the farm :" + f.getFarm().getName());
+        }
+        Field fieldToUpdate = updateFieldDTOToFieldEntityMapper.toEntity(data);
+        fieldToUpdate.setFarm(f.getFarm());
+        fieldToUpdate.setId(id);
+        Field updateField = fieldPersistenceAdapter.save(fieldToUpdate);
+        return fieldEntityToFieldResponseDTOMapper.entityToDto(updateField);
     }
 
 
