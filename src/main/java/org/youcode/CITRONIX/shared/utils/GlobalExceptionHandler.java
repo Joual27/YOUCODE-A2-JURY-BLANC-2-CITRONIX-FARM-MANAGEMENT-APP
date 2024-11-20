@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
-import org.youcode.CITRONIX.app.exceptions.EntityNotFoundException;
-import org.youcode.CITRONIX.app.exceptions.UniqueFieldException;
+import org.youcode.CITRONIX.app.exceptions.*;
 import org.youcode.CITRONIX.shared.utils.DTOs.ErrorDTO;
 
 
@@ -71,6 +70,24 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UniqueFieldException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDTO handleUniqueFieldException(UniqueFieldException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(FarmSurfaceExceeded.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleFarmSurfaceExceededException(FarmSurfaceExceeded e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(FarmFieldsLimitReached.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleFarmFieldsLimitReachedException(FarmFieldsLimitReached e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(FieldMaxSurfaceExceeded.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleFieldMaxSurfaceExceededException(FieldMaxSurfaceExceeded e) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
     }
 
