@@ -81,5 +81,11 @@ public class FarmServiceImp implements FarmService {
         return farmEntityToFarmResponseDTOMapper.entityToDto(f);
     }
 
+    @Override
+    public Farm getFarmEntityById(Long id){
+       return farmPersistenceAdapter.findById(id)
+               .orElseThrow(() -> new EntityNotFoundException("No farm found with given ID !"));
+    }
+
 }
 
