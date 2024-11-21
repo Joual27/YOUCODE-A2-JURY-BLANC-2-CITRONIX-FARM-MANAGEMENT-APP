@@ -1,4 +1,4 @@
-package org.youcode.CITRONIX.app.specifications;
+package org.youcode.CITRONIX.infra.specifications;
 
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;

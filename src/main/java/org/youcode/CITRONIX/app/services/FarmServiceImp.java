@@ -16,7 +16,7 @@ import org.youcode.CITRONIX.app.exceptions.UniqueFieldException;
 import org.youcode.CITRONIX.app.services.interfaces.FarmService;
 import org.youcode.CITRONIX.core.entities.Farm;
 import org.youcode.CITRONIX.infra.adapters.outbound.persistence.FarmPersistenceAdapter;
-import org.youcode.CITRONIX.app.specifications.FarmSpecification;
+import org.youcode.CITRONIX.infra.specifications.FarmSpecification;
 
 import java.time.LocalDateTime;
 import java.util.List;
