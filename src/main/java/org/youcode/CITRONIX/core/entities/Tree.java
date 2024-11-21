@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.youcode.CITRONIX.shared.BaseEntity;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,4 +23,8 @@ public class Tree extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "FIELD_ID")
     private Field field;
+
+    public boolean isProductive(){
+        return Period.between(plantingDate , LocalDate.now()).getYears() < 20;
+    }
 }

@@ -73,21 +73,33 @@ public class GlobalExceptionHandler {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
     }
 
-    @ExceptionHandler(FarmSurfaceExceeded.class)
+    @ExceptionHandler(FarmSurfaceExceededException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDTO handleFarmSurfaceExceededException(FarmSurfaceExceeded e) {
+    public ErrorDTO handleFarmSurfaceExceededException(FarmSurfaceExceededException e) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
     }
 
-    @ExceptionHandler(FarmFieldsLimitReached.class)
+    @ExceptionHandler(FarmFieldsLimitReachedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDTO handleFarmFieldsLimitReachedException(FarmFieldsLimitReached e) {
+    public ErrorDTO handleFarmFieldsLimitReachedException(FarmFieldsLimitReachedException e) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
     }
 
-    @ExceptionHandler(FieldMaxSurfaceExceeded.class)
+    @ExceptionHandler(FieldMaxSurfaceExceededException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDTO handleFieldMaxSurfaceExceededException(FieldMaxSurfaceExceeded e) {
+    public ErrorDTO handleFieldMaxSurfaceExceededException(FieldMaxSurfaceExceededException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(InvalidPlantingDateException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleInvalidPlantingDateException(InvalidPlantingDateException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(FieldMaxDensityReachedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleInvalidPlantingDateException(FieldMaxDensityReachedException e) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
     }
 
