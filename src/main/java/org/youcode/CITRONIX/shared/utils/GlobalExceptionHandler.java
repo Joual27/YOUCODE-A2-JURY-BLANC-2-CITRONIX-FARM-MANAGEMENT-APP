@@ -1,5 +1,6 @@
 package org.youcode.CITRONIX.shared.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -100,6 +101,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(FieldMaxDensityReachedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDTO handleInvalidPlantingDateException(FieldMaxDensityReachedException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(InvalidEnumException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleInvalidEnumException(InvalidEnumException e) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
     }
 

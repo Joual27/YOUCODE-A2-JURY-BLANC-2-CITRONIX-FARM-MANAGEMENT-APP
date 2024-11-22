@@ -13,4 +13,6 @@ public interface FieldDAO extends GenericDao<Field , Long> {
 
     @Query("SELECT SUM(f.surface) FROM Field f WHERE f.farm = :farm")
     Double getOverallFieldsSurfacePerFarm(@Param("farm") Farm farm);
+
+
 }

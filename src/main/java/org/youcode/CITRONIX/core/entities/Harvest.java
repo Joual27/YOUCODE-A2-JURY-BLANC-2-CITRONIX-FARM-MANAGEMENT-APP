@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.youcode.CITRONIX.core.enums.Season;
 import org.youcode.CITRONIX.shared.BaseEntity;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public class Harvest extends BaseEntity {
     @Column
     private int year;
     @Column
-    private Season season;
+    private String season;
 
     @ManyToOne
     @JoinColumn(name = "FIELD_ID")
