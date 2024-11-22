@@ -53,7 +53,7 @@ public class FarmServiceImp implements FarmService {
 
     @Override
     public List<FarmResponseDTO> searchFarms(String name , String location , Double minSurface , Double maxSurface){
-        Specification<Farm> specification = FarmSpcification.searchFarms(name , location , minSurface , maxSurface );
+        Specification<Farm> specification = FarmSpecification.searchFarms(name , location , minSurface , maxSurface );
         List<Farm> farms = farmPersistenceAdapter.findAll(specification);
         return farms.stream()
                 .map(farmEntityToFarmResponseDTOMapper::entityToDto)

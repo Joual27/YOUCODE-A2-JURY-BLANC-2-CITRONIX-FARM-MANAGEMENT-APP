@@ -18,6 +18,9 @@ public class Harvest extends BaseEntity {
     @Column
     private String season;
 
+    @Column
+    private double quantity = 0;
+
     @ManyToOne
     @JoinColumn(name = "FIELD_ID")
     private Field field;
