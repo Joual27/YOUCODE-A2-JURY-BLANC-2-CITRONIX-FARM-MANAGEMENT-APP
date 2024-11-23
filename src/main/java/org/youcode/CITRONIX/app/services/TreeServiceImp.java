@@ -35,7 +35,7 @@ public class TreeServiceImp implements TreeService {
     public TreeResponseDTO save(CreateTreeDTO data){
         Field f = fieldService.getFieldEntityById(data.fieldId());
         if (f.getTrees().size() == getMaxAllowedTreesOfField(f)){
-            throw  new FieldMaxDensityReachedException("This field already reached the limit of planting !");
+            throw new FieldMaxDensityReachedException("This field already reached the limit of planting !");
         }
         if (!isValidPlantingDate(data.plantingDate())){
             throw new InvalidPlantingDateException("Trees can only be planted between March and Mai");
