@@ -18,7 +18,7 @@ public class Sale extends BaseEntity {
     @Column
     private double quantity;
     @Column(name = "UNIT_PRICE")
-    private double unitPrice;
+    private Double unitPrice;
 
     @Column(name = "CLIENT_NAME")
     private String clientName;

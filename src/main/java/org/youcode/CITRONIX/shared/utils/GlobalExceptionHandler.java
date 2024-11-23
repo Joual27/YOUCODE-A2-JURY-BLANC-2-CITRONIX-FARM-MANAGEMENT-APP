@@ -121,5 +121,10 @@ public class GlobalExceptionHandler {
     public ErrorDTO handleTreeDoesntBelongToFieldException(TreeDoesntBelongToFieldException e) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
     }
+    @ExceptionHandler(AvailableSaleQuantityExceededException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleAvailableSaleQuantityExceededException(AvailableSaleQuantityExceededException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
 
 }
