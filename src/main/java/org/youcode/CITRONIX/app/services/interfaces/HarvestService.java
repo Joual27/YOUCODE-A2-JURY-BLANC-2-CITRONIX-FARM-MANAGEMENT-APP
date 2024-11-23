@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.youcode.CITRONIX.app.DTOs.harvest.CreateHarvestDTO;
 import org.youcode.CITRONIX.app.DTOs.harvest.HarvestResponseDTO;
 import org.youcode.CITRONIX.app.DTOs.harvest.UpdateHarvestDTO;
+import org.youcode.CITRONIX.core.entities.Harvest;
 
 public interface HarvestService {
     HarvestResponseDTO save(CreateHarvestDTO data);
@@ -12,4 +13,5 @@ public interface HarvestService {
     Page<HarvestResponseDTO> getAll(Pageable pageable);
     HarvestResponseDTO getById(Long id);
     HarvestResponseDTO delete(Long id);
+    Harvest getEntityById(Long id);
 }

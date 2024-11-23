@@ -81,6 +81,12 @@ public class TreeServiceImp implements TreeService {
         return treeEntityToTreeResponseDTOMapper.entityToDto(treeToDelete);
     }
 
+    @Override
+    public Tree getEntityById(Long id){
+        return treePersistenceAdapter.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("NO TREE  FOUND WITH GIVEN ID !"));
+    }
+
     private int getMaxAllowedTreesOfField(Field f){
         double res = f.getSurface() / 10000 * 100;
         return (int) res;

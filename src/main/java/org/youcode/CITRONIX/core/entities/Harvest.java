@@ -27,4 +27,7 @@ public class Harvest extends BaseEntity {
 
     @OneToMany(mappedBy = "harvest" , fetch = FetchType.EAGER)
     private List<TreeHarvest> treeHarvests;
+
+    @OneToMany(mappedBy = "harvest" , fetch = FetchType.EAGER)
+    private List<Sale> sales;
 }
