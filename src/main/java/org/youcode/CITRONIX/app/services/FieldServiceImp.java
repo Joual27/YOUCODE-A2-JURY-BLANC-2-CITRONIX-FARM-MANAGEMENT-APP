@@ -85,6 +85,7 @@ public class FieldServiceImp implements FieldService {
                 .orElseThrow(() -> new EntityNotFoundException("No Field found with given ID !"));
         return fieldEntityToFieldResponseDTOMapper.entityToDto(f);
     }
+
     @Override
     public FieldResponseDTO delete(Long id){
         Field f = fieldPersistenceAdapter.findById(id)

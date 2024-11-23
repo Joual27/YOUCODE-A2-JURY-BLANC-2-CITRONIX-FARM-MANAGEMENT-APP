@@ -18,10 +18,16 @@ public class Harvest extends BaseEntity {
     @Column
     private String season;
 
+    @Column
+    private double quantity = 0;
+
     @ManyToOne
     @JoinColumn(name = "FIELD_ID")
     private Field field;
 
     @OneToMany(mappedBy = "harvest" , fetch = FetchType.EAGER)
     private List<TreeHarvest> treeHarvests;
+
+    @OneToMany(mappedBy = "harvest" , fetch = FetchType.EAGER)
+    private List<Sale> sales;
 }

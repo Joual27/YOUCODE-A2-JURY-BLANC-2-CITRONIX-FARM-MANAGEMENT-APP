@@ -110,4 +110,21 @@ public class GlobalExceptionHandler {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
     }
 
+    @ExceptionHandler(TreeAlreadyHarvestedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleTreeAlreadyHarvestedException(TreeAlreadyHarvestedException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(TreeDoesntBelongToFieldException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleTreeDoesntBelongToFieldException(TreeDoesntBelongToFieldException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
+    @ExceptionHandler(AvailableSaleQuantityExceededException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleAvailableSaleQuantityExceededException(AvailableSaleQuantityExceededException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+    }
+
 }

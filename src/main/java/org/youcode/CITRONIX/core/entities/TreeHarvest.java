@@ -13,7 +13,6 @@ import org.youcode.CITRONIX.core.embeddebales.TreeHarvestKey;
 public class TreeHarvest {
      @EmbeddedId
      private TreeHarvestKey id;
-
      @Column
      private double quantity;
      @ManyToOne

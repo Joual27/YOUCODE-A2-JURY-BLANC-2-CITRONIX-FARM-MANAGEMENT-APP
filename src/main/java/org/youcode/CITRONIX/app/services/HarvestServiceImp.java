@@ -84,5 +84,10 @@ public class HarvestServiceImp implements HarvestService {
         return season.equalsIgnoreCase("SUMMER") || season.equalsIgnoreCase("WINTER") || season.equalsIgnoreCase("SPRING") || season.equalsIgnoreCase("AUTUMN");
     }
 
+    @Override
+    public Harvest getEntityById(Long id){
+        return harvestPersistenceAdapter.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No Harvest Found with given ID !"));
+    }
 
 }
